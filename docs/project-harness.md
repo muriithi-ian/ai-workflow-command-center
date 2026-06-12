@@ -1,0 +1,66 @@
+# Project Harness
+
+## Purpose
+
+This file summarizes the operating rules for building AI Workflow Command Center. Keep the long-form reference in `ai_workflow_command_center_harness_free_stack.md`, and use this file with `AGENTS.md`, `skills/`, and the rest of `docs/` for day-to-day development.
+
+## Project Goal
+
+Build a polished public portfolio demo that proves practical AI workflow engineering: document ingestion, RAG search, AI workflow execution, human review, audit logs, authentication, backend APIs, and deployment-aware documentation.
+
+The project should feel like a small but credible internal AI operations tool. Even when using mock data and free-tier infrastructure, design the workflows as if real teams would depend on clear state, safe failure modes, role boundaries, and traceable decisions.
+
+## Chosen MVP Stack
+
+- Frontend: Next.js, React, TypeScript, Tailwind CSS
+- Backend: single FastAPI backend
+- Database: Supabase Postgres
+- Vector search: Supabase pgvector
+- Auth: Supabase Auth
+- Storage: Supabase Storage
+- AI: mock AI mode by default, optional OpenAI/Claude key or local OpenAI-compatible LLM mode for local development
+- CI/CD: GitHub Actions
+- Deployment: Vercel frontend, free/near-free FastAPI backend host, Supabase
+
+## MVP Scope
+
+- Auth with Admin and Reviewer roles
+- Document upload or seeded document ingestion
+- Document list/detail views
+- Text extraction and chunking
+- RAG search with source snippets
+- AI run history
+- Document Intake Review workflow
+- Human review queue
+- Audit logs
+- Admin dashboard metrics
+- README, API docs, architecture docs, and screenshots
+
+## Guardrails
+
+- Do not use private company data, code, prompts, screenshots, workflows, or UI.
+- Do not build paid services into the default public demo.
+- Do not expose or consume the project owner's paid API keys.
+- Do not make local LLM mode required for the public demo.
+- Do not add features outside MVP without explaining why.
+- Ask before changing architecture.
+- Prefer a complete, polished MVP over a broad unfinished system.
+
+## Real-World Readiness Principles
+
+- Show operational state clearly: pending, processing, failed, reviewed, approved, rejected.
+- Keep AI output tied to inputs, sources, model/provider metadata, and reviewer decisions.
+- Prefer source-grounded answers over unsupported generation.
+- Make failure modes visible and recoverable.
+- Document demo limitations as implementation trade-offs, not excuses.
+- Keep a clear path from free-demo architecture to production architecture.
+
+## Definition Of Done
+
+- App runs locally from documented setup steps.
+- Demo data exists.
+- RAG answers show source snippets.
+- AI outputs are stored as AI runs.
+- At least one AI workflow reaches human review.
+- Review decisions and important actions create audit logs.
+- Tests, docs, and demo instructions are updated.

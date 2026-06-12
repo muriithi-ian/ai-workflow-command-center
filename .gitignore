@@ -1,0 +1,92 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.yarn/
+.npm/
+
+# Next.js / frontend builds
+.next/
+out/
+dist/
+build/
+.vercel/
+
+# Python / FastAPI
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+secrets/
+credentials/
+service-account*.json
+
+# Supabase / local database
+.supabase/
+supabase/.branches/
+supabase/.temp/
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded/demo/generated files
+uploads/
+storage/
+tmp/
+temp/
+generated/
+exports/
+*.log
+
+# AI / vector / local model artifacts
+.embeddings/
+vector-store/
+chroma/
+qdrant_storage/
+models/
+*.onnx
+*.gguf
+
+# Test and coverage outputs
+coverage/
+test-results/
+playwright-report/
+*.lcov
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Docker/local runtime
+docker-data/
+*.pid
+
+# Misc
+.cache/
+.turbo/

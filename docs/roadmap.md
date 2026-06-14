@@ -13,8 +13,21 @@
 - Admin dashboard metrics
 - README, API, architecture, security, and testing docs
 
+## Completed Locally
+
+- Phase 0 project scaffold
+- Phase 1 foundation: dashboard, demo auth, protected routes, config status, seed data
+- Phase 2 local documents: upload metadata validation, seeded document details, deterministic processing stages, extracted chunks, blocked processing state, Supabase schema scaffold
+
+## Needs External Input
+
+- Supabase credentials for real Auth, Storage, Postgres, and pgvector persistence
+- Optional LM Studio/local model name for local LLM provider testing
+- Deployment target choices for public frontend/backend hosting
+
 ## Next
 
+- Persist document uploads and chunks in Supabase
 - Background jobs for document processing
 - Better AI evaluation metrics
 - More granular role-based permissions

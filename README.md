@@ -15,6 +15,7 @@ Implemented so far:
 - Seeded document list/detail pages with extracted chunks
 - Upload metadata validation API
 - Deterministic document processing scaffold
+- Document processing pipeline UI with completed and blocked states
 - Mock RAG query API and frontend with source snippets
 - AI run history API and frontend detail views
 - Document Intake Review workflow API and frontend tool-step page
@@ -72,11 +73,16 @@ Open `http://localhost:3000`, continue as Demo Admin, then use the dashboard nav
 1. Login at `/login`.
 2. Open `/dashboard` and review computed metrics.
 3. Open `/documents/doc_vendor_intake` and inspect extracted chunks.
-4. Ask a grounded question in `/rag`.
-5. Inspect stored AI run details in `/ai-runs`.
-6. Open `/workflows/document-intake` and review the tool-call sequence.
-7. Open `/reviews` and inspect pending/completed reviewer states.
-8. Open `/audit-logs` and show the workflow event trail.
+4. Open `/documents/doc_vendor_intake/processing` and show the processing stages.
+5. Ask a grounded question in `/rag`.
+6. Inspect stored AI run details in `/ai-runs`.
+7. Open `/workflows/document-intake` and review the tool-call sequence.
+8. Open `/reviews` and inspect pending/completed reviewer states.
+9. Open `/audit-logs` and show the workflow event trail.
+
+## Current Local Phase Boundary
+
+Phase 2 is complete for local/mock mode: the app can register upload metadata, show seeded document detail, expose deterministic processing stages, show extracted chunks, and document the Supabase persistence path. Real file storage, persisted document rows, background jobs, and pgvector writes require Supabase project credentials.
 
 ## Checks
 

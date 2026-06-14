@@ -98,6 +98,18 @@ The foundation layer now exposes safe runtime configuration without requiring Su
 - Supabase scaffold includes initial schema and synthetic seed SQL, but live Supabase credentials are not required for local mock mode.
 - Full Supabase Auth, role checks, and persisted tables are later Phase 1 chunks.
 
+## Phase 2 Local Document Processing
+
+Phase 2 is complete for credential-free local mode:
+
+- Upload registration validates synthetic file metadata without storing files.
+- Seeded documents expose metadata, extracted chunks, and processing status.
+- Processing API responses include validation, extraction, chunking, RAG-readiness, and audit event metadata.
+- Processing UI shows completed and blocked states for ready and still-processing documents.
+- Supabase migration and seed files document the persistence path for documents, chunks, embeddings, reviews, and audit logs.
+
+Phase 2 persistence work now requires Supabase credentials before writing real Auth, Storage, Postgres, or pgvector integrations.
+
 ## Guardrails
 
 - Do not use private company data, code, prompts, screenshots, workflows, or UI.

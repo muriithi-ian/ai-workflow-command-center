@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { getDemoSession, hasRole } from "@/lib/auth";
 import { getRuntimeEnvironment } from "@/lib/env";
 
 const metrics = [
@@ -32,6 +33,7 @@ const auditEvents = ["document.processed", "ai_run.created", "review.created"];
 
 export default function DashboardPage() {
   const runtime = getRuntimeEnvironment();
+  const session = getDemoSession();
 
   return (
     <main className="dashboard-shell">
@@ -43,6 +45,7 @@ export default function DashboardPage() {
           <a aria-current="page" href="/dashboard">
             Dashboard
           </a>
+          <Link href="/login">Login</Link>
           <a href="/dashboard#documents">Documents</a>
           <a href="/dashboard#reviews">Reviews</a>
           <a href="/dashboard#audit">Audit logs</a>
@@ -67,6 +70,25 @@ export default function DashboardPage() {
             </small>
           </div>
         </header>
+
+        <section className="auth-card" aria-label="Current demo session">
+          <div>
+            <span className="eyebrow">Protected dashboard scaffold</span>
+            <h2>{session.user.displayName}</h2>
+            <p>{session.user.email}</p>
+          </div>
+          <div className="role-list" aria-label="Current user roles">
+            {session.user.roles.map((role) => (
+              <span className="status-badge" key={role}>
+                {role}
+              </span>
+            ))}
+          </div>
+          <p className="muted-copy">
+            Reviewer access: {hasRole(session.user, "reviewer") ? "enabled" : "disabled"} · Admin
+            access: {hasRole(session.user, "admin") ? "enabled" : "disabled"}
+          </p>
+        </section>
 
         <section className="metrics" aria-label="Dashboard metrics">
           {metrics.map((metric) => (

@@ -80,6 +80,7 @@ The foundation layer now exposes safe runtime configuration without requiring Su
 - Frontend reads demo-safe runtime status from `apps/web/lib/env.ts`.
 - Backend exposes `GET /api/config/status` with booleans only, never secret values.
 - Supabase is optional during scaffolding; missing keys keep the app in demo/mock mode.
+- Auth scaffold exposes `GET /api/auth/session` and `/login` with demo Admin/Reviewer roles only.
 - Full Supabase Auth, role checks, and persisted tables are later Phase 1 chunks.
 
 ## Guardrails

@@ -46,6 +46,7 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | Method | Route | Purpose | Auth |
 |---|---|---|---|
 | `GET` | `/api/health` | Return backend health status | Public |
+| `GET` | `/api/auth/session` | Return current demo session scaffold | Public during scaffold |
 | `GET` | `/api/config/status` | Return safe runtime configuration booleans | Public |
 | `GET` | `/api/dashboard/metrics` | Return dashboard metrics | User |
 | `GET` | `/api/documents` | List documents | User |
@@ -60,7 +61,7 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | `POST` | `/api/reviews/:id/decision` | Approve, reject, or request changes | Reviewer |
 | `GET` | `/api/audit-logs` | List audit events | Admin |
 
-Phase 1 scaffold note: list and metrics routes currently return synthetic demo data without persistence while Supabase auth, database tables, and role checks are added in later foundation chunks.
+Phase 1 scaffold note: auth, list, and metrics routes currently return synthetic demo data without persistence while Supabase auth, database tables, and role checks are added in later foundation chunks.
 
 ## Error Codes
 

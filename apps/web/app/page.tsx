@@ -46,6 +46,9 @@ export default function HomePage() {
         <Link className="button-link" href="/dashboard">
           Open dashboard foundation
         </Link>
+        <Link className="secondary-link" href="/login">
+          View demo login scaffold
+        </Link>
       </section>
     </main>
   );

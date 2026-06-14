@@ -44,6 +44,7 @@ export default function DashboardPage() {
           <Link href="/login">Login</Link>
           <Link href="/documents">Documents</Link>
           <Link href="/rag">RAG search</Link>
+          <Link href="/ai-runs">AI runs</Link>
           <a href="/dashboard#reviews">Reviews</a>
           <a href="/dashboard#audit">Audit logs</a>
         </nav>
@@ -185,6 +186,19 @@ export default function DashboardPage() {
             </p>
             <Link className="button-link" href="/rag">
               Open RAG search
+            </Link>
+          </article>
+
+          <article className="panel" aria-labelledby="ai-runs-title">
+            <div className="panel-heading">
+              <h2 id="ai-runs-title">AI run history</h2>
+              <span className="status-badge">Traceable</span>
+            </div>
+            <p className="muted-copy">
+              Inspect provider metadata, outputs, retrieved context, and fallback notes.
+            </p>
+            <Link className="button-link" href="/ai-runs">
+              View AI runs
             </Link>
           </article>
 

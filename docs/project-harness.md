@@ -84,6 +84,7 @@ The foundation layer now exposes safe runtime configuration without requiring Su
 - The root route `/` redirects to `/login`; `/dashboard` is the post-login demo destination.
 - Frontend document views expose `/documents` and `/documents/[documentId]` using synthetic seed data that mirrors the backend API.
 - RAG scaffold exposes `POST /api/rag/query` and `/rag` with deterministic mock answers, source snippets, and no-context fallback behavior.
+- AI run history exposes `GET /api/ai-runs`, `GET /api/ai-runs/{id}`, `/ai-runs`, and `/ai-runs/[runId]` for traceable mock runs.
 - Full Supabase Auth, role checks, and persisted tables are later Phase 1 chunks.
 
 ## Guardrails

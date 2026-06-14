@@ -487,6 +487,29 @@ th {
   padding: 6px 10px;
 }
 
+.decision-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.decision-actions button {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--foreground);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 10px 14px;
+}
+
+.decision-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .timeline {
   margin-bottom: 0;
   color: var(--muted);

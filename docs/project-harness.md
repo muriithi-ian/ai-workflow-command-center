@@ -85,6 +85,7 @@ The foundation layer now exposes safe runtime configuration without requiring Su
 - Frontend document views expose `/documents` and `/documents/[documentId]` using synthetic seed data that mirrors the backend API.
 - RAG scaffold exposes `POST /api/rag/query` and `/rag` with deterministic mock answers, source snippets, and no-context fallback behavior.
 - AI run history exposes `GET /api/ai-runs`, `GET /api/ai-runs/{id}`, `/ai-runs`, and `/ai-runs/[runId]` for traceable mock runs.
+- Review scaffold exposes `GET /api/reviews`, `POST /api/reviews/{id}/decision`, `/reviews`, and `/reviews/[reviewId]` for human review decisions.
 - Full Supabase Auth, role checks, and persisted tables are later Phase 1 chunks.
 
 ## Guardrails

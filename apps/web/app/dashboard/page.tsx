@@ -45,7 +45,7 @@ export default function DashboardPage() {
           <Link href="/documents">Documents</Link>
           <Link href="/rag">RAG search</Link>
           <Link href="/ai-runs">AI runs</Link>
-          <a href="/dashboard#reviews">Reviews</a>
+          <Link href="/reviews">Reviews</Link>
           <a href="/dashboard#audit">Audit logs</a>
         </nav>
       </aside>
@@ -149,7 +149,9 @@ export default function DashboardPage() {
               {reviewQueue.map((item) => (
                 <div className="queue-item" key={item.title}>
                   <div>
-                    <strong>{item.title}</strong>
+                    <Link className="table-link" href="/reviews">
+                      {item.title}
+                    </Link>
                     <p>{item.source}</p>
                   </div>
                   <span className="status-badge warning">{item.priority}</span>

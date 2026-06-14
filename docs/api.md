@@ -91,6 +91,8 @@ Validation rules:
 
 `POST /api/documents/doc_vendor_intake/process` currently runs deterministic seed chunking and returns the chunks that would later be indexed for RAG.
 
+The processing response includes explicit pipeline `stages` for validation, extraction, chunking, and RAG index preparation. This keeps the local demo transparent while real background jobs and Supabase persistence are deferred.
+
 ```json
 {
   "data": {

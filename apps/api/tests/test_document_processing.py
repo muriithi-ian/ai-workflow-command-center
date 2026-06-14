@@ -15,7 +15,14 @@ def test_process_document_returns_deterministic_chunks() -> None:
     assert body["data"]["status"] == "processed"
     assert body["data"]["chunk_count"] == 3
     assert body["data"]["chunks"][0]["id"] == "chunk_vendor_scope"
+    assert [stage["name"] for stage in body["data"]["stages"]] == [
+        "validate_document",
+        "extract_text",
+        "chunk_text",
+        "prepare_rag_index",
+    ]
     assert body["data"]["next_step"] == "ready_for_rag_indexing"
+    assert body["data"]["audit_event"] == "document.processed"
 
 
 def test_process_document_rejects_document_without_chunks() -> None:

@@ -17,8 +17,8 @@ Use a realistic but synthetic vendor onboarding review. The uploaded document sh
 5. Open `/documents/doc_vendor_intake/processing` and show validation, extraction, chunking, RAG-readiness, and audit event output.
 6. Open `/documents/doc_contract_notes/processing` to demonstrate the blocked state for a document still processing.
 7. Open `/rag` and ask: “What risks are mentioned in the vendor onboarding document?”
-8. Review the mock RAG answer and point out source snippets.
-9. Open `/ai-runs` and inspect a run detail page to show provider, model, input, output, and retrieved context.
+8. Review the mock RAG answer and point out source snippets, embedding IDs, matched terms, and vector previews.
+9. Open `/ai-runs` and inspect a run detail page to show provider, model, input, output, retrieved context, and retrieval evidence.
 10. Open `/workflows/document-intake` and explain the bounded tool-call sequence.
 11. Open `/reviews` and show pending/completed review states.
 12. Open `/audit-logs` and show document, RAG, AI, workflow, and review events.
@@ -59,6 +59,7 @@ Use synthetic documents such as:
 - Seeded document data exists and document chunks display.
 - Document processing page shows completed and blocked stage states.
 - RAG question returns source snippets.
+- RAG page shows mock embedding index metadata and retrieval evidence.
 - AI run detail page shows provider/model metadata and retrieved context.
 - Workflow page shows tool-call steps and safe blocked state.
 - Review queue has pending and completed items.

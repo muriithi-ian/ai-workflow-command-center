@@ -111,6 +111,19 @@ Phase 2 is complete for credential-free local mode:
 
 Phase 2 persistence work now requires Supabase credentials before writing real Auth, Storage, Postgres, or pgvector integrations.
 
+## Phase 3 Local AI And RAG
+
+Phase 3 is complete for credential-free local mode:
+
+- Mock embeddings are deterministic and do not call paid providers.
+- `POST /api/rag/query` returns grounded answers, source snippets, embedding IDs, matched terms, retrieval reasons, and no-context fallback behavior.
+- `GET /api/rag/index` exposes mock index readiness, dimensions, chunk count, and vector previews.
+- `/rag` shows the same source and index evidence for demo reviewers.
+- AI run detail pages preserve retrieved context metadata for traceability.
+- AI provider status stays safe by reporting booleans and notes only, not API keys.
+
+Phase 3 real-provider work now requires either OpenAI/Anthropic credentials or a running local OpenAI-compatible LLM plus a selected model.
+
 ## Guardrails
 
 - Do not use private company data, code, prompts, screenshots, workflows, or UI.

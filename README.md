@@ -16,6 +16,8 @@ Implemented so far:
 - Upload metadata validation API
 - Deterministic document processing scaffold
 - Document processing pipeline UI with completed and blocked states
+- Deterministic mock embedding pipeline with retrieval diagnostics
+- RAG index status API/UI evidence with vector previews
 - Mock RAG query API and frontend with source snippets
 - AI run history API and frontend detail views
 - Document Intake Review workflow API and frontend tool-step page
@@ -74,8 +76,8 @@ Open `http://localhost:3000`, continue as Demo Admin, then use the dashboard nav
 2. Open `/dashboard` and review computed metrics.
 3. Open `/documents/doc_vendor_intake` and inspect extracted chunks.
 4. Open `/documents/doc_vendor_intake/processing` and show the processing stages.
-5. Ask a grounded question in `/rag`.
-6. Inspect stored AI run details in `/ai-runs`.
+5. Ask a grounded question in `/rag` and inspect matched terms, embedding IDs, and vector previews.
+6. Inspect stored AI run details in `/ai-runs` and verify retrieved context metadata.
 7. Open `/workflows/document-intake` and review the tool-call sequence.
 8. Open `/reviews` and inspect pending/completed reviewer states.
 9. Open `/audit-logs` and show the workflow event trail.
@@ -83,6 +85,8 @@ Open `http://localhost:3000`, continue as Demo Admin, then use the dashboard nav
 ## Current Local Phase Boundary
 
 Phase 2 is complete for local/mock mode: the app can register upload metadata, show seeded document detail, expose deterministic processing stages, show extracted chunks, and document the Supabase persistence path. Real file storage, persisted document rows, background jobs, and pgvector writes require Supabase project credentials.
+
+Phase 3 is complete for local/mock mode: the app can generate deterministic mock embeddings, expose RAG index readiness, retrieve grounded source snippets, show matched terms and embedding IDs, store AI run-shaped records, and demonstrate no-context fallback behavior. Real OpenAI/Anthropic/local LLM generation requires provider configuration and a selected model.
 
 ## Checks
 

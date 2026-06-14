@@ -63,6 +63,11 @@ export default async function DocumentDetailPage({ params }: DocumentDetailPageP
           This is synthetic seed content. Upload handling, file validation, and Supabase Storage are
           intentionally deferred to the document upload chunk.
         </p>
+        {document.status === "ready" ? (
+          <Link className="button-link" href="/workflows/document-intake">
+            Start intake workflow
+          </Link>
+        ) : null}
       </section>
 
       <section className="panel" aria-labelledby="chunks-title">

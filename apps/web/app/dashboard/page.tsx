@@ -40,6 +40,7 @@ export default function DashboardPage() {
           <Link href="/documents">Documents</Link>
           <Link href="/rag">RAG search</Link>
           <Link href="/ai-runs">AI runs</Link>
+          <Link href="/workflows/document-intake">Workflow</Link>
           <Link href="/reviews">Reviews</Link>
           <Link href="/audit-logs">Audit logs</Link>
         </nav>
@@ -196,6 +197,20 @@ export default function DashboardPage() {
             </p>
             <Link className="button-link" href="/ai-runs">
               View AI runs
+            </Link>
+          </article>
+
+          <article className="panel" aria-labelledby="workflow-title">
+            <div className="panel-heading">
+              <h2 id="workflow-title">Document Intake workflow</h2>
+              <span className="status-badge warning">Needs review</span>
+            </div>
+            <p className="muted-copy">
+              Inspect the bounded tool-call flow that creates an AI run, review checkpoint, and
+              audit event.
+            </p>
+            <Link className="button-link" href="/workflows/document-intake">
+              Open workflow
             </Link>
           </article>
 

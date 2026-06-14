@@ -59,6 +59,35 @@ The shared pattern is the same: ingest source material, retrieve relevant eviden
 7. A reviewer approves, rejects, or requests changes.
 8. Audit logs record the important actions.
 
+## End-To-End Demo Flow
+
+```mermaid
+sequenceDiagram
+  participant U as User
+  participant Web as Next.js Frontend
+  participant API as FastAPI Backend
+  participant RAG as Mock RAG Service
+  participant Review as Human Review
+  participant Audit as Audit Trail
+
+  U->>Web: Login as Demo Admin
+  U->>Web: Open seeded document
+  Web->>API: POST /documents/{id}/process
+  API-->>Web: Return stages and chunks
+  U->>Web: Ask grounded RAG question
+  Web->>API: POST /rag/query
+  API->>RAG: Retrieve mock embedded chunks
+  RAG-->>API: Return answer, sources, matched terms
+  API-->>Web: Return AI-run-shaped response
+  U->>Web: Submit reviewer decision
+  Web->>Review: Validate local decision shape
+  Review-->>Web: Show audit event preview
+  U->>Web: Open audit log
+  Web->>Audit: Read linked synthetic events
+```
+
+The local demo keeps the flow deterministic while preserving production-shaped boundaries: processing stages, RAG retrieval evidence, AI run metadata, review decisions, and audit events.
+
 ## Demo Trade-Offs
 
 - Free-tier infrastructure is used for accessibility and low operating cost.
@@ -66,6 +95,14 @@ The shared pattern is the same: ingest source material, retrieve relevant eviden
 - Mock AI mode is acceptable for public demos to avoid exposing paid API keys.
 - Local LLM mode is useful for offline or cost-controlled local development, but should not be required for the deployed demo.
 - Observability is limited to application logs and audit tables.
+
+## Local Completion Boundary
+
+Credential-free local mode currently proves the full portfolio story through seeded data and deterministic mock providers. The next implementation boundary is real persistence and provider execution:
+
+- Supabase credentials are required for durable Auth, Storage, Postgres, pgvector, review decisions, and audit rows.
+- A local LM Studio/OpenAI-compatible model name is required to test local LLM generation.
+- Deployment targets are required before public demo URLs and screenshots can be finalized.
 
 ## Operational Considerations
 

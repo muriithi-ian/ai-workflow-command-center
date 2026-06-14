@@ -62,3 +62,16 @@ def review_state_conflict_response(message: str) -> JSONResponse:
             },
         },
     )
+
+
+def workflow_not_ready_response(message: str) -> JSONResponse:
+    return JSONResponse(
+        status_code=409,
+        content={
+            "data": None,
+            "error": {
+                "code": "WORKFLOW_NOT_READY",
+                "message": message,
+            },
+        },
+    )

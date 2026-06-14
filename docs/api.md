@@ -251,6 +251,17 @@ Mock RAG fallback responses return `status: "no_context"` and an empty `sources`
 
 Review decisions return the updated review state and an audit event name. Completed reviews return `REVIEW_STATE_CONFLICT` if another decision is attempted.
 
+## Example Document Intake Workflow Request
+
+```json
+{
+  "document_id": "doc_vendor_intake",
+  "requested_by": "demo.admin@example.com"
+}
+```
+
+`POST /api/workflows/document-intake` starts the constrained demo workflow for a ready document. The response includes deterministic tool-call steps, a generated AI run ID, a review ID, the workflow status, and the audit event name. Documents that are still processing return `WORKFLOW_NOT_READY`.
+
 ## Audit Events
 
 Record audit events for document upload, processing completion, RAG queries, workflow starts, AI output generation, review decisions, sign-ins, and user-visible errors.

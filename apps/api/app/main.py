@@ -10,6 +10,7 @@ from app.api.routes.health import router as health_router
 from app.api.routes.rag import router as rag_router
 from app.api.routes.reviews import router as reviews_router
 from app.api.routes.runs import router as runs_router
+from app.api.routes.workflows import router as workflows_router
 from app.core.config import get_settings
 
 settings = get_settings()
@@ -35,5 +36,6 @@ app.include_router(dashboard_router, prefix="/api")
 app.include_router(documents_router, prefix="/api")
 app.include_router(rag_router, prefix="/api")
 app.include_router(runs_router, prefix="/api")
+app.include_router(workflows_router, prefix="/api")
 app.include_router(reviews_router, prefix="/api")
 app.include_router(audit_logs_router, prefix="/api")

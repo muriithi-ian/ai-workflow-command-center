@@ -84,6 +84,35 @@ Validation rules:
 - Extensions: `.pdf`, `.txt`, `.md`, `.docx`.
 - Rejected types return `UPLOAD_REJECTED` with a user-safe message.
 
+## Example Document Processing Response
+
+`POST /api/documents/doc_vendor_intake/process` currently runs deterministic seed chunking and returns the chunks that would later be indexed for RAG.
+
+```json
+{
+  "data": {
+    "document_id": "doc_vendor_intake",
+    "status": "processed",
+    "chunk_count": 3,
+    "chunks": [
+      {
+        "id": "chunk_vendor_scope",
+        "document_id": "doc_vendor_intake",
+        "ordinal": 1,
+        "heading": "Scope and data access",
+        "content": "The vendor will process synthetic customer support summaries...",
+        "token_count": 39
+      }
+    ],
+    "processed_at": "2026-01-15T12:30:00Z",
+    "next_step": "ready_for_rag_indexing"
+  },
+  "error": null
+}
+```
+
+Documents without extracted chunks return `DOCUMENT_PROCESSING_FAILED` until extraction is complete.
+
 ## Example Document Detail Response
 
 ```json

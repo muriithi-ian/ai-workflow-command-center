@@ -36,3 +36,16 @@ def upload_rejected_response(message: str) -> JSONResponse:
             },
         },
     )
+
+
+def document_processing_failed_response(message: str) -> JSONResponse:
+    return JSONResponse(
+        status_code=409,
+        content={
+            "data": None,
+            "error": {
+                "code": "DOCUMENT_PROCESSING_FAILED",
+                "message": message,
+            },
+        },
+    )

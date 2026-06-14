@@ -227,7 +227,10 @@ export default function DashboardPage() {
             <ol className="timeline">
               {auditEvents.map((event) => (
                 <li key={event.id}>
-                  <strong>{event.action}</strong> by {event.actor}
+                  <Link className="table-link" href={event.href}>
+                    {event.action}
+                  </Link>{" "}
+                  by {event.actor}
                 </li>
               ))}
             </ol>

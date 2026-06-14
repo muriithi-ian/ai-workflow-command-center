@@ -96,6 +96,7 @@ The foundation layer now exposes safe runtime configuration without requiring Su
 - Workflow scaffold exposes `POST /api/workflows/document-intake` with deterministic tool-call steps that create a traceable AI run and review checkpoint.
 - Frontend workflow demo exposes `/workflows/document-intake` so reviewers can inspect the bounded tool-call sequence and blocked state.
 - Audit scaffold exposes `GET /api/audit-logs` and `/audit-logs` with deterministic workflow events and event-specific metadata.
+- Frontend audit events link back to the relevant document, processing view, RAG flow, AI run, or review item.
 - Supabase scaffold includes initial schema and synthetic seed SQL, but live Supabase credentials are not required for local mock mode.
 - Full Supabase Auth, role checks, and persisted tables are later Phase 1 chunks.
 

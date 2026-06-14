@@ -45,7 +45,12 @@ export default function AuditLogsPage() {
                     <span className="status-badge">{event.action}</span>
                   </td>
                   <td>{event.actor}</td>
-                  <td>{event.target}</td>
+                  <td>
+                    <Link className="table-link" href={event.href}>
+                      {event.targetLabel}
+                    </Link>
+                    <p className="table-note">{event.target}</p>
+                  </td>
                   <td>{formatDocumentDate(event.createdAt)}</td>
                   <td>
                     <div className="metadata-list">

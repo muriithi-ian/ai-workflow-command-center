@@ -61,7 +61,7 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | `POST` | `/api/reviews/:id/decision` | Approve, reject, or request changes | Reviewer |
 | `GET` | `/api/audit-logs` | List audit events | Admin |
 
-Phase 1 scaffold note: auth, list, metrics, document detail, and document upload-registration routes currently return synthetic demo data without persistence while Supabase auth, database tables, and role checks are added in later foundation chunks.
+Phase 1/3 scaffold note: auth, list, metrics, document detail, upload registration, processing, and RAG routes currently return deterministic synthetic demo data without persistence while Supabase auth, database tables, pgvector, and role checks are added in later chunks.
 
 ## Example Document Upload Registration Request
 
@@ -176,7 +176,7 @@ List endpoints should support pagination when implemented:
 ```json
 {
   "question": "What risks are mentioned in the vendor onboarding document?",
-  "documentIds": ["doc_123"]
+  "document_ids": ["doc_vendor_intake"]
 }
 ```
 
@@ -185,19 +185,29 @@ List endpoints should support pagination when implemented:
 ```json
 {
   "data": {
-    "answer": "The document identifies incomplete security review and missing data retention terms as risks.",
+    "answer": "Mock RAG answer for: 'What risks are mentioned in the vendor onboarding document?'. The grounded context comes from Vendor Intake Security Review.",
     "sources": [
       {
-        "documentId": "doc_123",
-        "chunkId": "chunk_456",
-        "snippet": "Security review must be completed before vendor approval..."
+        "document_id": "doc_vendor_intake",
+        "document_title": "Vendor Intake Security Review",
+        "chunk_id": "chunk_vendor_risks",
+        "heading": "Approval blockers",
+        "snippet": "Open blockers include incomplete subprocesser review...",
+        "score": 0.25
       }
     ],
-    "aiRunId": "airun_789"
+    "ai_run_id": "airun_abc123",
+    "status": "completed",
+    "provider": "mock",
+    "model": "mock-rag-v1",
+    "created_at": "2026-01-15T12:30:00Z",
+    "input_summary": "What risks are mentioned in the vendor onboarding document?"
   },
   "error": null
 }
 ```
+
+Mock RAG fallback responses return `status: "no_context"` and an empty `sources` array. The deployed public demo must keep mock mode as the default and must not consume the project owner's private paid API key.
 
 ## Example Review Decision Request
 

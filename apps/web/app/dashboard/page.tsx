@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { getAuditLogs } from "@/lib/audit-logs";
 import { getDemoSession, hasRole } from "@/lib/auth";
 import { getDocumentSummaries } from "@/lib/documents";
 import { getRuntimeEnvironment } from "@/lib/env";
@@ -24,12 +25,11 @@ const reviewQueue = [
   }
 ];
 
-const auditEvents = ["document.processed", "ai_run.created", "review.created"];
-
 export default function DashboardPage() {
   const runtime = getRuntimeEnvironment();
   const session = getDemoSession();
   const documents = getDocumentSummaries();
+  const auditEvents = getAuditLogs().slice(0, 3);
 
   return (
     <main className="dashboard-shell">
@@ -46,7 +46,7 @@ export default function DashboardPage() {
           <Link href="/rag">RAG search</Link>
           <Link href="/ai-runs">AI runs</Link>
           <Link href="/reviews">Reviews</Link>
-          <a href="/dashboard#audit">Audit logs</a>
+          <Link href="/audit-logs">Audit logs</Link>
         </nav>
       </aside>
 
@@ -205,10 +205,17 @@ export default function DashboardPage() {
           </article>
 
           <article className="panel" id="audit" aria-labelledby="audit-title">
-            <h2 id="audit-title">Recent audit events</h2>
+            <div className="panel-heading">
+              <h2 id="audit-title">Recent audit events</h2>
+              <Link className="table-link" href="/audit-logs">
+                View all
+              </Link>
+            </div>
             <ol className="timeline">
               {auditEvents.map((event) => (
-                <li key={event}>{event}</li>
+                <li key={event.id}>
+                  <strong>{event.action}</strong> by {event.actor}
+                </li>
               ))}
             </ol>
           </article>

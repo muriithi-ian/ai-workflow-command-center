@@ -81,6 +81,7 @@ The foundation layer now exposes safe runtime configuration without requiring Su
 - Backend exposes `GET /api/config/status` with booleans only, never secret values.
 - Supabase is optional during scaffolding; missing keys keep the app in demo/mock mode.
 - Auth scaffold exposes `GET /api/auth/session` and `/login` with demo Admin/Reviewer roles only.
+- The root route `/` redirects to `/login`; `/dashboard` is the post-login demo destination.
 - Full Supabase Auth, role checks, and persisted tables are later Phase 1 chunks.
 
 ## Guardrails

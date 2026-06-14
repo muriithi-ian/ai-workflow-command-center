@@ -12,6 +12,10 @@ def test_dashboard_metrics_returns_demo_metrics() -> None:
     body = response.json()
     assert body["error"] is None
     assert body["data"]["metrics"][0]["label"] == "Documents"
+    assert body["data"]["metrics"][0]["value"] == 3
+    assert body["data"]["metrics"][1]["label"] == "AI runs"
+    assert body["data"]["metrics"][1]["value"] == 3
+    assert body["data"]["metrics"][3]["value"] == 6
 
 
 def test_documents_list_uses_paginated_response_shape() -> None:

@@ -2,15 +2,9 @@ import Link from "next/link";
 
 import { getAuditLogs } from "@/lib/audit-logs";
 import { getDemoSession, hasRole } from "@/lib/auth";
+import { getDashboardMetrics } from "@/lib/dashboard";
 import { getDocumentSummaries } from "@/lib/documents";
 import { getRuntimeEnvironment } from "@/lib/env";
-
-const metrics = [
-  { label: "Documents", value: "3", detail: "2 ready, 1 processing" },
-  { label: "AI runs", value: "5", detail: "Mock mode active" },
-  { label: "Pending reviews", value: "2", detail: "1 high priority" },
-  { label: "Audit events", value: "12", detail: "Traceable workflow" }
-];
 
 const reviewQueue = [
   {
@@ -28,6 +22,7 @@ const reviewQueue = [
 export default function DashboardPage() {
   const runtime = getRuntimeEnvironment();
   const session = getDemoSession();
+  const metrics = getDashboardMetrics();
   const documents = getDocumentSummaries();
   const auditEvents = getAuditLogs().slice(0, 3);
 

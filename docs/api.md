@@ -61,7 +61,7 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | `POST` | `/api/reviews/:id/decision` | Approve, reject, or request changes | Reviewer |
 | `GET` | `/api/audit-logs` | List audit events | Admin |
 
-Phase 1/3 scaffold note: auth, list, metrics, document detail, upload registration, processing, and RAG routes currently return deterministic synthetic demo data without persistence while Supabase auth, database tables, pgvector, and role checks are added in later chunks.
+Phase 1/3 scaffold note: auth, list, metrics, document detail, upload registration, processing, and RAG routes currently return deterministic synthetic demo data without persistence while Supabase auth, database tables, pgvector, and role checks are added in later chunks. Dashboard metrics are computed from the same seed documents, AI runs, reviews, and audit events that appear in the UI.
 
 ## Example Document Upload Registration Request
 

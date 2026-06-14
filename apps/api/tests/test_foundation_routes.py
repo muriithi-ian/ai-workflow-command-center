@@ -73,4 +73,4 @@ def test_audit_logs_list_includes_structured_events() -> None:
     assert response.status_code == 200
     body = response.json()
     assert body["error"] is None
-    assert body["data"]["items"][0]["action"] == "document.processed"
+    assert body["data"]["items"][0]["action"] == "document.upload_registered"

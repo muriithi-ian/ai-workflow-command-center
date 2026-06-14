@@ -255,6 +255,8 @@ Review decisions return the updated review state and an audit event name. Comple
 
 Record audit events for document upload, processing completion, RAG queries, workflow starts, AI output generation, review decisions, sign-ins, and user-visible errors.
 
+Audit log entries include structured `metadata` for event-specific evidence, such as chunk counts, provider mode, review decision, or source document IDs. The scaffold returns a deterministic synthetic timeline from `GET /api/audit-logs`.
+
 ## Production API Hardening
 
 For production, add rate limiting, structured request logging, correlation IDs, tighter CORS rules, idempotency keys for upload/workflow actions, and OpenAPI documentation generated from FastAPI schemas.

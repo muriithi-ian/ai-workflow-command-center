@@ -68,6 +68,9 @@ export default async function DocumentDetailPage({ params }: DocumentDetailPageP
             Start intake workflow
           </Link>
         ) : null}
+        <Link className="secondary-link" href={`/documents/${document.id}/processing`}>
+          View processing pipeline
+        </Link>
       </section>
 
       <section className="panel" aria-labelledby="chunks-title">

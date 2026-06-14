@@ -88,6 +88,7 @@ The foundation layer now exposes safe runtime configuration without requiring Su
 - Dashboard metrics are computed from seeded documents, AI runs, reviews, and audit logs instead of hardcoded product claims.
 - Frontend document views expose `/documents` and `/documents/[documentId]` using synthetic seed data that mirrors the backend API.
 - Frontend upload registration exposes `/documents/upload` with local validation for allowed synthetic file metadata.
+- Frontend processing views expose `/documents/[documentId]/processing` with validation, extraction, chunking, RAG-readiness, and blocked states.
 - RAG scaffold exposes `POST /api/rag/query` and `/rag` with deterministic mock answers, source snippets, and no-context fallback behavior.
 - AI run history exposes `GET /api/ai-runs`, `GET /api/ai-runs/{id}`, `/ai-runs`, and `/ai-runs/[runId]` for traceable mock runs.
 - Review scaffold exposes `GET /api/reviews`, `POST /api/reviews/{id}/decision`, `/reviews`, and `/reviews/[reviewId]` for human review decisions.

@@ -45,6 +45,7 @@ export default function DocumentsPage() {
                   <th scope="col">Chunks</th>
                   <th scope="col">Uploaded by</th>
                   <th scope="col">Created</th>
+                  <th scope="col">Pipeline</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,6 +68,11 @@ export default function DocumentsPage() {
                     <td>{document.chunks.length}</td>
                     <td>{document.uploadedBy}</td>
                     <td>{formatDocumentDate(document.createdAt)}</td>
+                    <td>
+                      <Link className="table-link" href={`/documents/${document.id}/processing`}>
+                        View stages
+                      </Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>

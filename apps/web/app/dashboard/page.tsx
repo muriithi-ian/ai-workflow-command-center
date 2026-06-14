@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { getDemoSession, hasRole } from "@/lib/auth";
+import { getDocumentSummaries } from "@/lib/documents";
 import { getRuntimeEnvironment } from "@/lib/env";
 
 const metrics = [
@@ -8,12 +9,6 @@ const metrics = [
   { label: "AI runs", value: "5", detail: "Mock mode active" },
   { label: "Pending reviews", value: "2", detail: "1 high priority" },
   { label: "Audit events", value: "12", detail: "Traceable workflow" }
-];
-
-const documents = [
-  { title: "Vendor Intake Security Review", status: "Ready", owner: "Admin", chunks: 8 },
-  { title: "Data Retention Policy Update", status: "Ready", owner: "Reviewer", chunks: 6 },
-  { title: "Contract Exception Notes", status: "Processing", owner: "Admin", chunks: 0 }
 ];
 
 const reviewQueue = [
@@ -34,6 +29,7 @@ const auditEvents = ["document.processed", "ai_run.created", "review.created"];
 export default function DashboardPage() {
   const runtime = getRuntimeEnvironment();
   const session = getDemoSession();
+  const documents = getDocumentSummaries();
 
   return (
     <main className="dashboard-shell">
@@ -46,7 +42,7 @@ export default function DashboardPage() {
             Dashboard
           </a>
           <Link href="/login">Login</Link>
-          <a href="/dashboard#documents">Documents</a>
+          <Link href="/documents">Documents</Link>
           <a href="/dashboard#reviews">Reviews</a>
           <a href="/dashboard#audit">Audit logs</a>
         </nav>
@@ -119,12 +115,22 @@ export default function DashboardPage() {
                 <tbody>
                   {documents.map((document) => (
                     <tr key={document.title}>
-                      <td>{document.title}</td>
                       <td>
-                        <span className="status-badge">{document.status}</span>
+                        <Link className="table-link" href={`/documents/${document.id}`}>
+                          {document.title}
+                        </Link>
                       </td>
-                      <td>{document.owner}</td>
-                      <td>{document.chunks}</td>
+                      <td>
+                        <span
+                          className={`status-badge ${
+                            document.status === "processing" ? "warning" : ""
+                          }`}
+                        >
+                          {document.status}
+                        </span>
+                      </td>
+                      <td>{document.uploadedBy}</td>
+                      <td>{document.chunks.length}</td>
                     </tr>
                   ))}
                 </tbody>

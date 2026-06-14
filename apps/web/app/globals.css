@@ -46,6 +46,18 @@ body {
   background: linear-gradient(135deg, #ffffff 0%, #eef4ff 100%);
 }
 
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding: 40px;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: linear-gradient(135deg, #ffffff 0%, #eef4ff 100%);
+}
+
 .eyebrow {
   margin: 0 0 12px;
   color: var(--accent);
@@ -105,6 +117,12 @@ h1 {
   display: block;
   margin-top: 12px;
   font-size: 2rem;
+}
+
+.metric-card .small-strong {
+  overflow-wrap: anywhere;
+  font-size: 1.05rem;
+  line-height: 1.4;
 }
 
 .metric-card small {
@@ -313,6 +331,16 @@ th {
   text-transform: uppercase;
 }
 
+.table-link {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.table-link:hover {
+  text-decoration: underline;
+}
+
 .status-badge {
   display: inline-flex;
   border-radius: 999px;
@@ -366,6 +394,47 @@ th {
   color: var(--muted);
 }
 
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.empty-state {
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.empty-state p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.chunk-list {
+  display: grid;
+  gap: 16px;
+}
+
+.chunk-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fbfdff;
+  padding: 18px;
+}
+
+.chunk-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.chunk-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
 .timeline {
   margin-bottom: 0;
   color: var(--muted);
@@ -379,6 +448,11 @@ th {
   }
 
   .hero {
+    padding: 28px;
+  }
+
+  .page-header {
+    flex-direction: column;
     padding: 28px;
   }
 
@@ -418,7 +492,8 @@ th {
     justify-content: flex-start;
   }
 
-  .dashboard-grid {
+  .dashboard-grid,
+  .detail-grid {
     grid-template-columns: 1fr;
   }
 }

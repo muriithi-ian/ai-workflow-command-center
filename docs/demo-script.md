@@ -20,8 +20,8 @@ Use a realistic but synthetic vendor onboarding review. The uploaded document sh
 8. Review the mock RAG answer and point out source snippets, embedding IDs, matched terms, and vector previews.
 9. Open `/ai-runs` and inspect a run detail page to show provider, model, input, output, retrieved context, and retrieval evidence.
 10. Open `/workflows/document-intake` and explain the bounded tool-call sequence.
-11. Open `/reviews` and show pending/completed review states.
-12. Open `/audit-logs` and show document, RAG, AI, workflow, and review events.
+11. Open `/reviews/review_vendor_risk_summary`, choose a decision, add a reviewer note, and show the local audit event preview.
+12. Open `/audit-logs` and show document, RAG, AI, workflow, and review events with links back to evidence.
 13. Return to `/dashboard` and explain that counts are computed from seeded demo state.
 
 ## What To Emphasize
@@ -63,5 +63,7 @@ Use synthetic documents such as:
 - AI run detail page shows provider/model metadata and retrieved context.
 - Workflow page shows tool-call steps and safe blocked state.
 - Review queue has pending and completed items.
+- Review detail accepts a local reviewer decision and locks after submission.
 - Audit log has visible structured events.
+- Audit log events link back to source evidence.
 - Browser console has no obvious app errors.

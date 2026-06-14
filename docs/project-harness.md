@@ -125,6 +125,19 @@ Phase 3 is complete for credential-free local mode:
 
 Phase 3 real-provider work now requires either OpenAI/Anthropic credentials or a running local OpenAI-compatible LLM plus a selected model.
 
+## Phase 4 Local Review And Audit
+
+Phase 4 is complete for credential-free local mode:
+
+- Review queue exposes pending and completed review states.
+- Review detail pages validate local reviewer decisions, reviewer emails, and reviewer notes.
+- Local decisions preview the audit event and lock after submission without claiming persistence.
+- Backend review decision API returns updated review state, reviewer metadata, and audit event names.
+- Completed backend reviews reject repeat decisions with `REVIEW_STATE_CONFLICT`.
+- Audit log UI links events back to documents, processing views, RAG, AI runs, and reviews.
+
+Phase 4 persistence work now requires Supabase credentials before storing reviewer decisions, durable audit rows, and role-enforced review mutations.
+
 ## Guardrails
 
 - Do not use private company data, code, prompts, screenshots, workflows, or UI.

@@ -19,6 +19,7 @@
 - Phase 1 foundation: dashboard, demo auth, protected routes, config status, seed data
 - Phase 2 local documents: upload metadata validation, seeded document details, deterministic processing stages, extracted chunks, blocked processing state, Supabase schema scaffold
 - Phase 3 local AI/RAG: deterministic mock embeddings, RAG index status, grounded source retrieval, source-level retrieval evidence, AI run traceability, no-context fallback
+- Phase 4 local review/audit: review queue, local decision validation, decision lock state, backend review decision API, linked audit evidence
 
 ## Needs External Input
 
@@ -30,6 +31,7 @@
 ## Next
 
 - Persist document uploads and chunks in Supabase
+- Persist reviewer decisions and audit log rows in Supabase
 - Background jobs for document processing
 - Real local or hosted LLM provider execution
 - Better AI evaluation metrics

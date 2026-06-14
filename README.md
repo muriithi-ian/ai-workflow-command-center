@@ -22,7 +22,9 @@ Implemented so far:
 - AI run history API and frontend detail views
 - Document Intake Review workflow API and frontend tool-step page
 - Human review queue and decision API
+- Local review decision panel with reviewer note validation and audit event preview
 - Audit log API and frontend event trail
+- Linked audit evidence back to documents, processing, RAG, AI runs, and reviews
 - Dashboard metrics computed from seeded demo data
 - Supabase schema scaffold with pgvector, RLS policies, and synthetic seed SQL
 - Project guidance in `AGENTS.md`, `skills/`, and `docs/`
@@ -79,14 +81,16 @@ Open `http://localhost:3000`, continue as Demo Admin, then use the dashboard nav
 5. Ask a grounded question in `/rag` and inspect matched terms, embedding IDs, and vector previews.
 6. Inspect stored AI run details in `/ai-runs` and verify retrieved context metadata.
 7. Open `/workflows/document-intake` and review the tool-call sequence.
-8. Open `/reviews` and inspect pending/completed reviewer states.
-9. Open `/audit-logs` and show the workflow event trail.
+8. Open `/reviews/review_vendor_risk_summary` and submit a local reviewer decision.
+9. Open `/audit-logs` and follow links back to workflow evidence.
 
 ## Current Local Phase Boundary
 
 Phase 2 is complete for local/mock mode: the app can register upload metadata, show seeded document detail, expose deterministic processing stages, show extracted chunks, and document the Supabase persistence path. Real file storage, persisted document rows, background jobs, and pgvector writes require Supabase project credentials.
 
 Phase 3 is complete for local/mock mode: the app can generate deterministic mock embeddings, expose RAG index readiness, retrieve grounded source snippets, show matched terms and embedding IDs, store AI run-shaped records, and demonstrate no-context fallback behavior. Real OpenAI/Anthropic/local LLM generation requires provider configuration and a selected model.
+
+Phase 4 is complete for local/mock mode: the app can show review queue state, validate local reviewer decisions, preview the audit event that would be written, reject repeat decisions in the backend API, and link audit events back to workflow evidence. Persisted review decisions and durable audit writes require Supabase credentials.
 
 ## Checks
 

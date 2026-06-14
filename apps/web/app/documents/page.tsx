@@ -19,6 +19,9 @@ export default function DocumentsPage() {
         <Link className="button-link" href="/dashboard">
           Back to dashboard
         </Link>
+        <Link className="secondary-link" href="/documents/upload">
+          Register upload
+        </Link>
       </section>
 
       <section className="panel" aria-labelledby="document-list-title">

@@ -185,6 +185,9 @@ export default function DashboardPage() {
             <Link className="button-link" href="/rag">
               Open RAG search
             </Link>
+            <Link className="secondary-link" href="/documents/upload">
+              Register upload
+            </Link>
           </article>
 
           <article className="panel" aria-labelledby="ai-runs-title">

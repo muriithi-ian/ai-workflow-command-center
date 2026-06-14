@@ -457,6 +457,7 @@ th {
   text-transform: uppercase;
 }
 
+.demo-form input,
 .demo-form textarea {
   width: 100%;
   resize: vertical;
@@ -466,6 +467,10 @@ th {
   font: inherit;
   line-height: 1.6;
   padding: 14px;
+}
+
+.demo-form input[type="file"] {
+  background: #ffffff;
 }
 
 .answer-copy {

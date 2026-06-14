@@ -1,4 +1,5 @@
 export type ReviewStatus = "pending" | "approved" | "rejected" | "changes_requested";
+export type ReviewDecision = "approved" | "rejected" | "changes_requested";
 
 export type DemoReview = {
   id: string;

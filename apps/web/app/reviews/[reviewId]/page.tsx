@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { formatDocumentDate } from "@/lib/documents";
 import { demoReviews, getReviewById } from "@/lib/reviews";
+import { ReviewDecisionPanel } from "./ReviewDecisionPanel";
 
 type ReviewDetailPageProps = {
   params: Promise<{
@@ -23,8 +24,6 @@ export default async function ReviewDetailPage({ params }: ReviewDetailPageProps
   if (!review) {
     notFound();
   }
-
-  const isPending = review.status === "pending";
 
   return (
     <main className="shell min-h-screen">
@@ -57,29 +56,7 @@ export default async function ReviewDetailPage({ params }: ReviewDetailPageProps
         </article>
       </section>
 
-      <section className="panel" aria-labelledby="decision-title">
-        <div className="panel-heading">
-          <h2 id="decision-title">Decision controls</h2>
-          <span className={`status-badge ${isPending ? "warning" : ""}`}>
-            {isPending ? "ready for reviewer" : "decision locked"}
-          </span>
-        </div>
-        <p className="muted-copy">
-          The backend exposes `POST /api/reviews/{review.id}/decision`. The public scaffold shows
-          the decision options without mutating persisted data yet.
-        </p>
-        <div className="decision-actions" aria-label="Review decision options">
-          <button type="button" disabled={!isPending}>
-            Approve
-          </button>
-          <button type="button" disabled={!isPending}>
-            Reject
-          </button>
-          <button type="button" disabled={!isPending}>
-            Request changes
-          </button>
-        </div>
-      </section>
+      <ReviewDecisionPanel reviewId={review.id} initialStatus={review.status} />
 
       <section className="panel" aria-labelledby="evidence-title">
         <div className="panel-heading">

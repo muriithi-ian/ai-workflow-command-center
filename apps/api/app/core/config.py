@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     next_public_supabase_anon_key: str = ""
     supabase_service_role_key: str = ""
     ai_mode: str = "mock"
+    openai_api_key: str = ""
+    anthropic_api_key: str = ""
     local_llm_base_url: str = "http://localhost:1234/v1"
     local_llm_model: str = ""
 

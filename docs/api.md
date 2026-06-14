@@ -48,6 +48,7 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | `GET` | `/api/health` | Return backend health status | Public |
 | `GET` | `/api/auth/session` | Return current demo session scaffold | Public during scaffold |
 | `GET` | `/api/config/status` | Return safe runtime configuration booleans | Public |
+| `GET` | `/api/ai/providers/status` | Return safe AI provider readiness flags | Public |
 | `GET` | `/api/dashboard/metrics` | Return dashboard metrics | User |
 | `GET` | `/api/documents` | List documents | User |
 | `POST` | `/api/documents` | Upload or register a document | User |
@@ -62,6 +63,8 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | `GET` | `/api/audit-logs` | List audit events | Admin |
 
 Phase 1/3 scaffold note: auth, list, metrics, document detail, upload registration, processing, and RAG routes currently return deterministic synthetic demo data without persistence while Supabase auth, database tables, pgvector, and role checks are added in later chunks. Dashboard metrics are computed from the same seed documents, AI runs, reviews, and audit events that appear in the UI.
+
+AI provider status routes return booleans and notes only. They do not return API keys, service role keys, local model prompts, or raw provider configuration values.
 
 ## Example Document Upload Registration Request
 

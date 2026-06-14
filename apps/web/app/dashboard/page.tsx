@@ -43,6 +43,7 @@ export default function DashboardPage() {
           </a>
           <Link href="/login">Login</Link>
           <Link href="/documents">Documents</Link>
+          <Link href="/rag">RAG search</Link>
           <a href="/dashboard#reviews">Reviews</a>
           <a href="/dashboard#audit">Audit logs</a>
         </nav>
@@ -172,6 +173,19 @@ export default function DashboardPage() {
                 <p>Uses concise messages without raw stack traces.</p>
               </div>
             </div>
+          </article>
+
+          <article className="panel" aria-labelledby="rag-title">
+            <div className="panel-heading">
+              <h2 id="rag-title">RAG search</h2>
+              <span className="status-badge">Mock mode</span>
+            </div>
+            <p className="muted-copy">
+              Ask a grounded question over seeded chunks and inspect the cited source snippets.
+            </p>
+            <Link className="button-link" href="/rag">
+              Open RAG search
+            </Link>
           </article>
 
           <article className="panel" id="audit" aria-labelledby="audit-title">

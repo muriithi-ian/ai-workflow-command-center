@@ -8,3 +8,4 @@ htmlcov/
 venv/
 __pycache__/
 *.md
+*.sql

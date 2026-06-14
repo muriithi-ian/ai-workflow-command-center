@@ -61,7 +61,28 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | `POST` | `/api/reviews/:id/decision` | Approve, reject, or request changes | Reviewer |
 | `GET` | `/api/audit-logs` | List audit events | Admin |
 
-Phase 1 scaffold note: auth, list, metrics, and document detail routes currently return synthetic demo data without persistence while Supabase auth, database tables, and role checks are added in later foundation chunks.
+Phase 1 scaffold note: auth, list, metrics, document detail, and document upload-registration routes currently return synthetic demo data without persistence while Supabase auth, database tables, and role checks are added in later foundation chunks.
+
+## Example Document Upload Registration Request
+
+The scaffold accepts upload metadata first. Binary file storage and Supabase Storage integration are deferred to a later document-upload chunk.
+
+```json
+{
+  "title": "Synthetic Vendor Policy",
+  "file_name": "synthetic-vendor-policy.md",
+  "mime_type": "text/markdown",
+  "size_bytes": 2048,
+  "uploaded_by": "demo.admin@example.com"
+}
+```
+
+Validation rules:
+
+- Max size: 5 MB.
+- MIME types: `application/pdf`, `text/plain`, `text/markdown`, `.docx` Office MIME type.
+- Extensions: `.pdf`, `.txt`, `.md`, `.docx`.
+- Rejected types return `UPLOAD_REJECTED` with a user-safe message.
 
 ## Example Document Detail Response
 

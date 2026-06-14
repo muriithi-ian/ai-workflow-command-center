@@ -23,3 +23,16 @@ def not_found_response(message: str) -> JSONResponse:
             },
         },
     )
+
+
+def upload_rejected_response(message: str) -> JSONResponse:
+    return JSONResponse(
+        status_code=400,
+        content={
+            "data": None,
+            "error": {
+                "code": "UPLOAD_REJECTED",
+                "message": message,
+            },
+        },
+    )

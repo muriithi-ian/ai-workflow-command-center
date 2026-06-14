@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { getRuntimeEnvironment } from "@/lib/env";
+
 const metrics = [
   { label: "Documents", value: "3", detail: "2 ready, 1 processing" },
   { label: "AI runs", value: "5", detail: "Mock mode active" },
@@ -29,6 +31,8 @@ const reviewQueue = [
 const auditEvents = ["document.processed", "ai_run.created", "review.created"];
 
 export default function DashboardPage() {
+  const runtime = getRuntimeEnvironment();
+
   return (
     <main className="dashboard-shell">
       <aside className="sidebar" aria-label="Primary navigation">
@@ -57,7 +61,10 @@ export default function DashboardPage() {
           </div>
           <div className="mode-card" aria-label="Demo mode">
             <span>AI mode</span>
-            <strong>Mock</strong>
+            <strong>{runtime.aiMode}</strong>
+            <small>
+              {runtime.supabaseConfigured ? "Supabase configured" : "Demo data, no database yet"}
+            </small>
           </div>
         </header>
 

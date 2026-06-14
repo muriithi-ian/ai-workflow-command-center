@@ -46,6 +46,7 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | Method | Route | Purpose | Auth |
 |---|---|---|---|
 | `GET` | `/api/health` | Return backend health status | Public |
+| `GET` | `/api/config/status` | Return safe runtime configuration booleans | Public |
 | `GET` | `/api/dashboard/metrics` | Return dashboard metrics | User |
 | `GET` | `/api/documents` | List documents | User |
 | `POST` | `/api/documents` | Upload or register a document | User |

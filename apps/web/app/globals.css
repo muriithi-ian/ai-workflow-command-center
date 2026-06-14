@@ -194,7 +194,8 @@ h1 {
 }
 
 .mode-card span,
-.mode-card strong {
+.mode-card strong,
+.mode-card small {
   display: block;
 }
 
@@ -207,6 +208,12 @@ h1 {
   margin-top: 6px;
   color: var(--success);
   font-size: 1.4rem;
+}
+
+.mode-card small {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.4;
 }
 
 .dashboard-grid {

@@ -73,6 +73,15 @@ npm run test
 npm run build
 ```
 
+## Phase 1 Foundation
+
+The foundation layer now exposes safe runtime configuration without requiring Supabase credentials:
+
+- Frontend reads demo-safe runtime status from `apps/web/lib/env.ts`.
+- Backend exposes `GET /api/config/status` with booleans only, never secret values.
+- Supabase is optional during scaffolding; missing keys keep the app in demo/mock mode.
+- Full Supabase Auth, role checks, and persisted tables are later Phase 1 chunks.
+
 ## Guardrails
 
 - Do not use private company data, code, prompts, screenshots, workflows, or UI.

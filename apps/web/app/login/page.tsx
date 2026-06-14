@@ -1,4 +1,20 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
+async function startDemoSession() {
+  "use server";
+
+  const cookieStore = await cookies();
+  cookieStore.set("demo_session", "admin", {
+    httpOnly: true,
+    maxAge: 60 * 60 * 8,
+    path: "/",
+    sameSite: "lax"
+  });
+
+  redirect("/dashboard");
+}
 
 const demoRoles = [
   {
@@ -23,9 +39,11 @@ export default function LoginPage() {
           The public portfolio demo uses a safe mock session while Supabase Auth is wired in later.
           No passwords, tokens, or private credentials are required for this scaffold.
         </p>
-        <Link className="button-link" href="/dashboard">
-          Continue as Demo Admin
-        </Link>
+        <form action={startDemoSession}>
+          <button className="button-link" type="submit">
+            Continue as Demo Admin
+          </button>
+        </form>
       </section>
 
       <section className="auth-grid" aria-label="Demo role accounts">
@@ -51,6 +69,9 @@ export default function LoginPage() {
           Replace the mock session with Supabase Auth, persist roles in the database, and enforce
           reviewer/admin checks from the FastAPI backend.
         </p>
+        <Link className="secondary-link" href="/">
+          Return to default entry path
+        </Link>
       </section>
     </main>
   );

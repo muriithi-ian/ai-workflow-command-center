@@ -81,6 +81,7 @@ The foundation layer now exposes safe runtime configuration without requiring Su
 - Backend exposes `GET /api/config/status` with booleans only, never secret values.
 - Supabase is optional during scaffolding; missing keys keep the app in demo/mock mode.
 - Auth scaffold exposes `GET /api/auth/session` and `/login` with demo Admin/Reviewer roles only.
+- Frontend middleware protects dashboard and workflow routes with an HTTP-only demo session cookie until Supabase Auth is wired in.
 - The root route `/` redirects to `/login`; `/dashboard` is the post-login demo destination.
 - Dashboard metrics are computed from seeded documents, AI runs, reviews, and audit logs instead of hardcoded product claims.
 - Frontend document views expose `/documents` and `/documents/[documentId]` using synthetic seed data that mirrors the backend API.

@@ -1,0 +1,32 @@
+{
+  "name": "ai-workflow-command-center",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Production-style portfolio demo for AI document workflows, RAG, human review, and audit logs.",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev:web": "npm --workspace apps/web run dev",
+    "build:web": "npm --workspace apps/web run build",
+    "typecheck:web": "npm --workspace apps/web run typecheck",
+    "lint:web": "npm --workspace apps/web run lint",
+    "dev:api": "node scripts/run-python.mjs -m uvicorn app.main:app --app-dir apps/api --reload --port 8000",
+    "test:api": "node scripts/run-python.mjs -m pytest apps/api",
+    "lint:api": "node scripts/run-python.mjs -m ruff check apps/api",
+    "typecheck:api": "node scripts/run-python.mjs -m mypy apps/api",
+    "build": "npm run build:web",
+    "typecheck": "npm run typecheck:web && npm run typecheck:api",
+    "lint": "npm run lint:web && npm run lint:api",
+    "test": "npm run test:api",
+    "format:check": "prettier . --check",
+    "format": "prettier . --write"
+  },
+  "engines": {
+    "node": ">=20",
+    "python": ">=3.11"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0"
+  }
+}

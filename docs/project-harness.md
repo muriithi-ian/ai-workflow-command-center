@@ -36,6 +36,43 @@ The project should feel like a small but credible internal AI operations tool. E
 - Admin dashboard metrics
 - README, API docs, architecture docs, and screenshots
 
+## Phase 0 Scaffold
+
+The current scaffold uses:
+
+- Root `package.json` for shared scripts.
+- `apps/web` for the Next.js frontend.
+- `apps/api` for the FastAPI backend.
+- `.github/workflows/ci.yml` for lightweight CI.
+- `.env.example` for required local configuration.
+
+Initial commands:
+
+```bash
+npm install
+cd apps/api
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install -e ".[dev]"
+```
+
+Run locally:
+
+```bash
+npm run dev:web
+npm run dev:api
+```
+
+Check locally:
+
+```bash
+npm run format:check
+npm run typecheck
+npm run lint
+npm run test
+npm run build
+```
+
 ## Guardrails
 
 - Do not use private company data, code, prompts, screenshots, workflows, or UI.

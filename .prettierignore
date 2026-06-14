@@ -1,0 +1,10 @@
+node_modules/
+.next/
+dist/
+build/
+coverage/
+htmlcov/
+.venv/
+venv/
+__pycache__/
+*.md

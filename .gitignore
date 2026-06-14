@@ -19,6 +19,7 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+*.egg-info/
 .coverage
 htmlcov/
 .venv/
@@ -68,6 +69,7 @@ coverage/
 test-results/
 playwright-report/
 *.lcov
+*.tsbuildinfo
 
 # OS/editor
 .DS_Store

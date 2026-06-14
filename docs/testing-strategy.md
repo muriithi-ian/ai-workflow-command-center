@@ -103,12 +103,23 @@ For a real-world-ready demo, check:
 
 Before marking implementation complete, run available:
 
+- Format check
 - Typecheck
 - Lint
 - Tests
 - Build
 
 If a check cannot run, document why and what would be needed.
+
+Current scaffold commands:
+
+```bash
+npm run format:check
+npm run typecheck
+npm run lint
+npm run test
+npm run build
+```
 
 ## Production Test Upgrades
 

@@ -22,6 +22,9 @@ def test_mock_rag_query_returns_grounded_answer_with_sources() -> None:
     assert body["data"]["model"] == "mock-rag-v1"
     assert body["data"]["ai_run_id"].startswith("airun_")
     assert body["data"]["sources"][0]["document_id"] == "doc_vendor_intake"
+    assert body["data"]["sources"][0]["embedding_id"].startswith("emb_chunk_")
+    assert body["data"]["sources"][0]["matched_terms"]
+    assert "mock-hash-embedding-v1" in body["data"]["sources"][0]["retrieval_reason"]
     assert body["data"]["sources"][0]["snippet"]
 
 

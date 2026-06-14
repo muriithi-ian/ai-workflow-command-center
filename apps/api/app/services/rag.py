@@ -4,6 +4,13 @@ from uuid import NAMESPACE_URL, uuid5
 from app.models.ai_runs import RagQueryData, RagQueryRequest, RagSource
 from app.models.documents import DocumentDetail
 from app.services.demo_documents import get_demo_documents
+from app.services.embeddings import (
+    MOCK_EMBEDDING_MODEL,
+    build_mock_embedding,
+    build_mock_embedding_id,
+    cosine_similarity,
+    tokenize,
+)
 
 MOCK_RAG_MODEL = "mock-rag-v1"
 
@@ -52,25 +59,34 @@ def _filter_documents(
 
 
 def _retrieve_sources(question: str, documents: list[DocumentDetail]) -> list[RagSource]:
-    question_terms = _tokenize(question)
+    question_terms = tokenize(question)
+    question_embedding = build_mock_embedding(question)
     scored_sources: list[RagSource] = []
 
     for document in documents:
         for chunk in document.chunks:
-            chunk_terms = _tokenize(f"{chunk.heading} {chunk.content}")
-            overlap = question_terms.intersection(chunk_terms)
-            if not overlap:
+            chunk_text = f"{chunk.heading} {chunk.content}"
+            chunk_terms = tokenize(chunk_text)
+            matched_terms = sorted(question_terms.intersection(chunk_terms))
+            if not matched_terms:
                 continue
 
-            score = round(len(overlap) / max(len(question_terms), 1), 3)
+            lexical_score = len(matched_terms) / max(len(question_terms), 1)
+            vector_score = cosine_similarity(question_embedding, build_mock_embedding(chunk_text))
+            score = round((lexical_score * 0.7) + (vector_score * 0.3), 3)
             scored_sources.append(
                 RagSource(
                     document_id=document.id,
                     document_title=document.title,
                     chunk_id=chunk.id,
+                    embedding_id=build_mock_embedding_id(chunk.id),
                     heading=chunk.heading,
                     snippet=chunk.content,
                     score=score,
+                    matched_terms=matched_terms,
+                    retrieval_reason=(
+                        f"Matched {len(matched_terms)} query terms using {MOCK_EMBEDDING_MODEL}."
+                    ),
                 )
             )
 
@@ -97,27 +113,3 @@ def _summarize_question(question: str) -> str:
     if len(normalized) <= 120:
         return normalized
     return f"{normalized[:117]}..."
-
-
-def _tokenize(value: str) -> set[str]:
-    stop_words = {
-        "a",
-        "an",
-        "about",
-        "and",
-        "are",
-        "demo",
-        "does",
-        "for",
-        "in",
-        "is",
-        "of",
-        "or",
-        "say",
-        "the",
-        "to",
-        "what",
-        "which",
-    }
-    cleaned = "".join(character.lower() if character.isalnum() else " " for character in value)
-    return {word for word in cleaned.split() if word and word not in stop_words}

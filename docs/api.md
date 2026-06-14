@@ -214,6 +214,8 @@ List endpoints should support pagination when implemented:
 
 Mock RAG fallback responses return `status: "no_context"` and an empty `sources` array. The deployed public demo must keep mock mode as the default and must not consume the project owner's private paid API key.
 
+RAG sources include deterministic mock embedding metadata: `embedding_id`, `matched_terms`, `score`, and `retrieval_reason`. This proves the retrieval boundary locally without requiring paid embeddings or a live pgvector table.
+
 ## Example AI Run Detail Response
 
 `GET /api/ai-runs/{id}` returns the stored run output, provider metadata, and retrieved context used by RAG answers.

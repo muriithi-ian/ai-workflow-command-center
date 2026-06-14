@@ -13,9 +13,12 @@ class RagSource(BaseModel):
     document_id: str
     document_title: str
     chunk_id: str
+    embedding_id: str
     heading: str
     snippet: str
     score: float
+    matched_terms: list[str]
+    retrieval_reason: str
 
 
 class RagQueryData(BaseModel):

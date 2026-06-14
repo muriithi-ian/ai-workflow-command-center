@@ -1,5 +1,8 @@
 from math import sqrt
 
+from app.models.documents import DocumentDetail
+from app.models.rag_index import RagIndexItem, RagIndexStatus
+
 MOCK_EMBEDDING_MODEL = "mock-hash-embedding-v1"
 MOCK_EMBEDDING_DIMENSIONS = 8
 
@@ -55,3 +58,31 @@ def cosine_similarity(left: list[float], right: list[float]) -> float:
 def tokenize(value: str) -> set[str]:
     cleaned = "".join(character.lower() if character.isalnum() else " " for character in value)
     return {word for word in cleaned.split() if word and word not in STOP_WORDS}
+
+
+def build_rag_index_status(documents: list[DocumentDetail]) -> RagIndexStatus:
+    items: list[RagIndexItem] = []
+
+    for document in documents:
+        for chunk in document.chunks:
+            vector = build_mock_embedding(f"{chunk.heading} {chunk.content}")
+            items.append(
+                RagIndexItem(
+                    document_id=document.id,
+                    document_title=document.title,
+                    chunk_id=chunk.id,
+                    embedding_id=build_mock_embedding_id(chunk.id),
+                    heading=chunk.heading,
+                    token_count=chunk.token_count,
+                    vector_preview=vector[:4],
+                )
+            )
+
+    return RagIndexStatus(
+        provider="mock",
+        model=MOCK_EMBEDDING_MODEL,
+        dimensions=MOCK_EMBEDDING_DIMENSIONS,
+        chunk_count=len(items),
+        status="ready" if items else "empty",
+        items=items,
+    )

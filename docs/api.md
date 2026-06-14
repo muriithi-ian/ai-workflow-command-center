@@ -54,6 +54,7 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | `POST` | `/api/documents` | Upload or register a document | User |
 | `GET` | `/api/documents/:id` | Get document metadata and chunks | User |
 | `POST` | `/api/documents/:id/process` | Extract, chunk, and index document text | Admin |
+| `GET` | `/api/rag/index` | Return mock RAG index readiness and embedding inventory | User |
 | `POST` | `/api/rag/query` | Ask a grounded question over documents | User |
 | `GET` | `/api/ai-runs` | List AI runs | User |
 | `GET` | `/api/ai-runs/:id` | Get AI run details and retrieved context | User |
@@ -215,6 +216,8 @@ List endpoints should support pagination when implemented:
 Mock RAG fallback responses return `status: "no_context"` and an empty `sources` array. The deployed public demo must keep mock mode as the default and must not consume the project owner's private paid API key.
 
 RAG sources include deterministic mock embedding metadata: `embedding_id`, `matched_terms`, `score`, and `retrieval_reason`. This proves the retrieval boundary locally without requiring paid embeddings or a live pgvector table.
+
+`GET /api/rag/index` reports the deterministic mock embedding index: provider, model, dimensions, chunk count, and short vector previews for seeded chunks. Production mode should replace this with Supabase pgvector-backed indexing and retrieval.
 
 ## Example AI Run Detail Response
 

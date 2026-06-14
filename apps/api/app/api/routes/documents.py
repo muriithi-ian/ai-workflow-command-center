@@ -1,21 +1,12 @@
-from datetime import UTC, datetime
-from typing import Literal
-
 from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
+from app.api.errors import ApiErrorResponse, not_found_response
+from app.models.documents import DocumentDetail, DocumentSummary
+from app.services.demo_documents import get_demo_document, get_document_summaries
+
 router = APIRouter(prefix="/documents", tags=["documents"])
-
-DocumentStatus = Literal["queued", "processing", "ready", "failed"]
-
-
-class DocumentSummary(BaseModel):
-    id: str
-    title: str
-    status: DocumentStatus
-    chunk_count: int
-    uploaded_by: str
-    created_at: datetime
 
 
 class DocumentListData(BaseModel):
@@ -30,34 +21,27 @@ class DocumentListResponse(BaseModel):
     error: None = None
 
 
+class DocumentDetailResponse(BaseModel):
+    data: DocumentDetail
+    error: None = None
+
+
 @router.get("", response_model=DocumentListResponse)
 def list_documents() -> DocumentListResponse:
-    documents = [
-        DocumentSummary(
-            id="doc_vendor_intake",
-            title="Vendor Intake Security Review",
-            status="ready",
-            chunk_count=8,
-            uploaded_by="demo.admin@example.com",
-            created_at=datetime(2026, 1, 12, 14, 30, tzinfo=UTC),
-        ),
-        DocumentSummary(
-            id="doc_policy_update",
-            title="Data Retention Policy Update",
-            status="ready",
-            chunk_count=6,
-            uploaded_by="demo.reviewer@example.com",
-            created_at=datetime(2026, 1, 14, 9, 15, tzinfo=UTC),
-        ),
-        DocumentSummary(
-            id="doc_contract_notes",
-            title="Contract Exception Notes",
-            status="processing",
-            chunk_count=0,
-            uploaded_by="demo.admin@example.com",
-            created_at=datetime(2026, 1, 15, 11, 45, tzinfo=UTC),
-        ),
-    ]
+    documents = get_document_summaries()
     return DocumentListResponse(
         data=DocumentListData(items=documents, page=1, page_size=25, total=len(documents))
     )
+
+
+@router.get(
+    "/{document_id}",
+    response_model=DocumentDetailResponse,
+    responses={404: {"model": ApiErrorResponse}},
+)
+def get_document(document_id: str) -> DocumentDetailResponse | JSONResponse:
+    document = get_demo_document(document_id)
+    if document is None:
+        return not_found_response(f"Document '{document_id}' was not found.")
+
+    return DocumentDetailResponse(data=document)

@@ -61,7 +61,35 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | `POST` | `/api/reviews/:id/decision` | Approve, reject, or request changes | Reviewer |
 | `GET` | `/api/audit-logs` | List audit events | Admin |
 
-Phase 1 scaffold note: auth, list, and metrics routes currently return synthetic demo data without persistence while Supabase auth, database tables, and role checks are added in later foundation chunks.
+Phase 1 scaffold note: auth, list, metrics, and document detail routes currently return synthetic demo data without persistence while Supabase auth, database tables, and role checks are added in later foundation chunks.
+
+## Example Document Detail Response
+
+```json
+{
+  "data": {
+    "id": "doc_vendor_intake",
+    "title": "Vendor Intake Security Review",
+    "status": "ready",
+    "chunk_count": 3,
+    "uploaded_by": "demo.admin@example.com",
+    "source_type": "seed",
+    "file_name": "vendor-intake-security-review.md",
+    "summary": "Security review notes for a synthetic vendor onboarding workflow...",
+    "chunks": [
+      {
+        "id": "chunk_vendor_scope",
+        "document_id": "doc_vendor_intake",
+        "ordinal": 1,
+        "heading": "Scope and data access",
+        "content": "The vendor will process synthetic customer support summaries...",
+        "token_count": 39
+      }
+    ]
+  },
+  "error": null
+}
+```
 
 ## Error Codes
 

@@ -60,7 +60,7 @@ exports/
 vector-store/
 chroma/
 qdrant_storage/
-models/
+/models/
 *.onnx
 *.gguf
 

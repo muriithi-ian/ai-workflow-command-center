@@ -244,9 +244,12 @@ Mock RAG fallback responses return `status: "no_context"` and an empty `sources`
 ```json
 {
   "decision": "approved",
-  "reviewerNote": "Summary is accurate and cites the relevant policy section."
+  "reviewer_note": "Summary is accurate and cites the relevant policy section.",
+  "reviewer_email": "demo.reviewer@example.com"
 }
 ```
+
+Review decisions return the updated review state and an audit event name. Completed reviews return `REVIEW_STATE_CONFLICT` if another decision is attempted.
 
 ## Audit Events
 

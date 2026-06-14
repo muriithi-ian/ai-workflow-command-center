@@ -49,3 +49,16 @@ def document_processing_failed_response(message: str) -> JSONResponse:
             },
         },
     )
+
+
+def review_state_conflict_response(message: str) -> JSONResponse:
+    return JSONResponse(
+        status_code=409,
+        content={
+            "data": None,
+            "error": {
+                "code": "REVIEW_STATE_CONFLICT",
+                "message": message,
+            },
+        },
+    )

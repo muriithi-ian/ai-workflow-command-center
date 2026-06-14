@@ -6,17 +6,23 @@ The MVP uses a Next.js + TypeScript frontend, a single FastAPI backend, Supabase
 
 ## Current Status
 
-Phase 0 scaffolding is in progress.
+The project is in MVP scaffolding with a working mock/demo flow. It does not require Supabase or paid AI credentials to run locally.
 
 Implemented so far:
 
-- Project guidance in `AGENTS.md`
-- Documentation in `docs/`
-- Codex skills in `skills/`
-- Root `.gitignore`
-- Root `.env.example`
-- Initial Next.js app shell in `apps/web`
-- Initial FastAPI app shell in `apps/api`
+- Demo login with HTTP-only mock session cookie
+- Protected dashboard routes
+- Seeded document list/detail pages with extracted chunks
+- Upload metadata validation API
+- Deterministic document processing scaffold
+- Mock RAG query API and frontend with source snippets
+- AI run history API and frontend detail views
+- Document Intake Review workflow API and frontend tool-step page
+- Human review queue and decision API
+- Audit log API and frontend event trail
+- Dashboard metrics computed from seeded demo data
+- Supabase schema scaffold with pgvector, RLS policies, and synthetic seed SQL
+- Project guidance in `AGENTS.md`, `skills/`, and `docs/`
 
 ## Local Setup
 
@@ -41,6 +47,12 @@ python -m venv .venv
 python -m pip install -e ".[dev]"
 ```
 
+On macOS/Linux, activate the backend environment with:
+
+```bash
+source .venv/bin/activate
+```
+
 Run the frontend:
 
 ```bash
@@ -53,6 +65,19 @@ Run the backend:
 npm run dev:api
 ```
 
+Open `http://localhost:3000`, continue as Demo Admin, then use the dashboard navigation.
+
+## Demo Path
+
+1. Login at `/login`.
+2. Open `/dashboard` and review computed metrics.
+3. Open `/documents/doc_vendor_intake` and inspect extracted chunks.
+4. Ask a grounded question in `/rag`.
+5. Inspect stored AI run details in `/ai-runs`.
+6. Open `/workflows/document-intake` and review the tool-call sequence.
+7. Open `/reviews` and inspect pending/completed reviewer states.
+8. Open `/audit-logs` and show the workflow event trail.
+
 ## Checks
 
 ```bash
@@ -64,6 +89,8 @@ npm run build
 ```
 
 These commands require dependencies to be installed first.
+
+Known local note: if `next dev` is running while `next build` runs, clear or restart the dev server if stale `_next` assets appear in the browser.
 
 ## Documentation
 

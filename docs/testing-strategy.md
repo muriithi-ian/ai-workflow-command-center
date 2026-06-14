@@ -89,11 +89,13 @@ For a real-world-ready demo, check:
 ## Manual QA Checklist
 
 - Login works.
+- Protected routes redirect to login before the demo session exists.
 - Dashboard metrics load.
 - Document upload or seeded document flow works.
 - Document chunks display.
 - RAG answer includes source snippets.
 - AI workflow creates a review item.
+- Workflow page shows deterministic tool-call steps and blocked state.
 - Reviewer can approve, reject, or request changes.
 - Audit log records the flow.
 - Empty/loading/error states are visible.

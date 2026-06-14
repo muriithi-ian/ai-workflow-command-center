@@ -10,17 +10,18 @@ Use a realistic but synthetic vendor onboarding review. The uploaded document sh
 
 ## Demo Path
 
-1. Login as a demo Admin or Reviewer.
-2. Open the dashboard and briefly explain the document, AI run, review, and audit metrics.
-3. Upload a synthetic document or select a seeded demo document.
-4. Open the document detail page and show extracted text chunks.
-5. Ask a RAG question about the document.
-6. Review the AI answer and point out the source snippets.
-7. Start or open the Document Intake Review workflow.
-8. Show the AI-generated summary, risks, missing information, and original input.
-9. Approve, reject, or request changes with a reviewer note.
-10. Open the audit log and show document, AI, and review events.
-11. Return to dashboard metrics and show the updated counts.
+1. Start at `/login` and continue as Demo Admin.
+2. Open `/dashboard` and briefly explain the document, AI run, review, and audit metrics.
+3. Open `/documents` and select `Vendor Intake Security Review`.
+4. On `/documents/doc_vendor_intake`, show extracted chunks and the workflow entry point.
+5. Open `/rag` and ask: “What risks are mentioned in the vendor onboarding document?”
+6. Review the mock RAG answer and point out source snippets.
+7. Open `/ai-runs` and inspect a run detail page to show provider, model, input, output, and retrieved context.
+8. Open `/workflows/document-intake` and explain the bounded tool-call sequence.
+9. Show the blocked state for a processing document to demonstrate safe workflow failure.
+10. Open `/reviews` and show pending/completed review states.
+11. Open `/audit-logs` and show document, RAG, AI, workflow, and review events.
+12. Return to `/dashboard` and explain that counts are computed from seeded demo state.
 
 ## What To Emphasize
 
@@ -52,10 +53,12 @@ Use synthetic documents such as:
 
 ## Pre-Demo Checklist
 
-- App runs locally or public demo URL is available.
-- Demo credentials work.
-- Seed data exists.
+- `npm run dev:web` and `npm run dev:api` run locally, or the public demo URL is available.
+- Login creates the demo session and protected routes redirect unauthenticated visitors.
+- Seeded document data exists and document chunks display.
 - RAG question returns source snippets.
-- Review queue has a pending item or can create one.
-- Audit log has visible events.
-- Browser console has no obvious errors.
+- AI run detail page shows provider/model metadata and retrieved context.
+- Workflow page shows tool-call steps and safe blocked state.
+- Review queue has pending and completed items.
+- Audit log has visible structured events.
+- Browser console has no obvious app errors.

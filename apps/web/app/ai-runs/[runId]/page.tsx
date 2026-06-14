@@ -84,6 +84,11 @@ export default async function AiRunDetailPage({ params }: AiRunDetailPageProps) 
                   <span className="status-badge">score {source.score}</span>
                 </div>
                 <p>{source.snippet}</p>
+                <div className="metadata-list" aria-label="Retrieval evidence">
+                  <span>{source.embeddingId}</span>
+                  <span>{source.retrievalReason}</span>
+                  <span>terms: {source.matchedTerms.join(", ")}</span>
+                </div>
                 <Link className="table-link" href={`/documents/${source.documentId}`}>
                   {source.documentTitle}
                 </Link>

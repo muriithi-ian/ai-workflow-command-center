@@ -90,6 +90,7 @@ The foundation layer now exposes safe runtime configuration without requiring Su
 - Frontend upload registration exposes `/documents/upload` with local validation for allowed synthetic file metadata.
 - Frontend processing views expose `/documents/[documentId]/processing` with validation, extraction, chunking, RAG-readiness, and blocked states.
 - RAG scaffold exposes `POST /api/rag/query` and `/rag` with deterministic mock answers, source snippets, and no-context fallback behavior.
+- RAG local mode includes deterministic mock embeddings, source-level retrieval metadata, and an index-status view that mirrors the pgvector persistence shape.
 - AI run history exposes `GET /api/ai-runs`, `GET /api/ai-runs/{id}`, `/ai-runs`, and `/ai-runs/[runId]` for traceable mock runs.
 - Review scaffold exposes `GET /api/reviews`, `POST /api/reviews/{id}/decision`, `/reviews`, and `/reviews/[reviewId]` for human review decisions.
 - Workflow scaffold exposes `POST /api/workflows/document-intake` with deterministic tool-call steps that create a traceable AI run and review checkpoint.

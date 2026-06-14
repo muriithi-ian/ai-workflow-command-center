@@ -4,9 +4,12 @@ type RagSource = {
   documentId: string;
   documentTitle: string;
   chunkId: string;
+  embeddingId: string;
   heading: string;
   snippet: string;
   score: number;
+  matchedTerms: string[];
+  retrievalReason: string;
 };
 
 type RagResult = {
@@ -19,7 +22,28 @@ type RagResult = {
   sources: RagSource[];
 };
 
+type RagIndexItem = {
+  documentId: string;
+  documentTitle: string;
+  chunkId: string;
+  embeddingId: string;
+  heading: string;
+  tokenCount: number;
+  vectorPreview: number[];
+};
+
+type RagIndexStatus = {
+  provider: "mock";
+  model: string;
+  dimensions: number;
+  chunkCount: number;
+  status: "ready" | "empty";
+  items: RagIndexItem[];
+};
+
 const defaultQuestion = "What risks are mentioned in the vendor onboarding document?";
+const mockEmbeddingModel = "mock-hash-embedding-v1";
+const mockEmbeddingDimensions = 8;
 
 const stopWords = new Set([
   "a",
@@ -66,7 +90,9 @@ export function runFrontendMockRag(question = defaultQuestion): RagResult {
     question,
     answer: `Mock RAG answer for: "${question}". The grounded context comes from ${[
       ...new Set(sources.map((source) => source.documentTitle))
-    ].join(", ")}. Review the cited snippets before using this output.`,
+    ].join(", ")}. The relevant source areas are ${sources
+      .map((source) => source.heading.toLowerCase())
+      .join("; ")}. Review the cited snippets before using this output.`,
     status: "completed",
     aiRunId,
     provider: "mock",
@@ -75,25 +101,56 @@ export function runFrontendMockRag(question = defaultQuestion): RagResult {
   };
 }
 
+export function getFrontendRagIndexStatus(): RagIndexStatus {
+  const items = demoDocuments.flatMap((document) =>
+    document.chunks.map((chunk) => ({
+      documentId: document.id,
+      documentTitle: document.title,
+      chunkId: chunk.id,
+      embeddingId: buildMockEmbeddingId(chunk.id),
+      heading: chunk.heading,
+      tokenCount: chunk.tokenCount,
+      vectorPreview: buildMockEmbedding(`${chunk.heading} ${chunk.content}`).slice(0, 4)
+    }))
+  );
+
+  return {
+    provider: "mock",
+    model: mockEmbeddingModel,
+    dimensions: mockEmbeddingDimensions,
+    chunkCount: items.length,
+    status: items.length > 0 ? "ready" : "empty",
+    items
+  };
+}
+
 function retrieveSources(question: string): RagSource[] {
   const questionTerms = tokenize(question);
+  const questionEmbedding = buildMockEmbedding(question);
   const scoredSources = demoDocuments.flatMap((document) =>
     document.chunks.flatMap((chunk) => {
-      const chunkTerms = tokenize(`${chunk.heading} ${chunk.content}`);
-      const overlap = [...questionTerms].filter((term) => chunkTerms.has(term));
+      const chunkText = `${chunk.heading} ${chunk.content}`;
+      const chunkTerms = tokenize(chunkText);
+      const matchedTerms = [...questionTerms].filter((term) => chunkTerms.has(term)).sort();
 
-      if (overlap.length === 0) {
+      if (matchedTerms.length === 0) {
         return [];
       }
+
+      const lexicalScore = matchedTerms.length / Math.max(questionTerms.size, 1);
+      const vectorScore = cosineSimilarity(questionEmbedding, buildMockEmbedding(chunkText));
 
       return [
         {
           documentId: document.id,
           documentTitle: document.title,
           chunkId: chunk.id,
+          embeddingId: buildMockEmbeddingId(chunk.id),
           heading: chunk.heading,
           snippet: chunk.content,
-          score: Number((overlap.length / Math.max(questionTerms.size, 1)).toFixed(3))
+          score: Number((lexicalScore * 0.7 + vectorScore * 0.3).toFixed(3)),
+          matchedTerms,
+          retrievalReason: `Matched ${matchedTerms.length} query terms using ${mockEmbeddingModel}.`
         }
       ];
     })
@@ -108,6 +165,36 @@ function tokenize(value: string): Set<string> {
     .map((character) => (/[a-z0-9]/i.test(character) ? character.toLowerCase() : " "))
     .join("");
   return new Set(cleaned.split(/\s+/).filter((word) => word && !stopWords.has(word)));
+}
+
+function buildMockEmbeddingId(chunkId: string): string {
+  return `emb_${chunkId}`;
+}
+
+function buildMockEmbedding(text: string): number[] {
+  const vector = Array.from({ length: mockEmbeddingDimensions }, () => 0);
+
+  for (const token of tokenize(text)) {
+    const bucket =
+      [...token].reduce((sum, character) => sum + character.charCodeAt(0), 0) %
+      mockEmbeddingDimensions;
+    vector[bucket] += 1;
+  }
+
+  const magnitude = Math.sqrt(vector.reduce((sum, value) => sum + value * value, 0));
+  if (magnitude === 0) {
+    return vector;
+  }
+
+  return vector.map((value) => Number((value / magnitude).toFixed(4)));
+}
+
+function cosineSimilarity(left: number[], right: number[]): number {
+  if (left.length !== right.length || left.length === 0) {
+    return 0;
+  }
+
+  return Number(left.reduce((sum, value, index) => sum + value * right[index], 0).toFixed(3));
 }
 
 function slugify(value: string): string {

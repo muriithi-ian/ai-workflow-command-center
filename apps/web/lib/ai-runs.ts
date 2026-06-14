@@ -15,9 +15,12 @@ export type AiRunDetail = {
     documentId: string;
     documentTitle: string;
     chunkId: string;
+    embeddingId: string;
     heading: string;
     snippet: string;
     score: number;
+    matchedTerms: string[];
+    retrievalReason: string;
   }[];
   errors: string[];
 };

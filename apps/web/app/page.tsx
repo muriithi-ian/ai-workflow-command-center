@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const metrics = [
   { label: "Documents", value: "0" },
   { label: "AI runs", value: "0" },
@@ -41,6 +43,9 @@ export default function HomePage() {
             <li key={step}>{step}</li>
           ))}
         </ol>
+        <Link className="button-link" href="/dashboard">
+          Open dashboard foundation
+        </Link>
       </section>
     </main>
   );

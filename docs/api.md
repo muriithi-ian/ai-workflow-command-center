@@ -59,6 +59,8 @@ Dashboard and workflow routes should require an authenticated user. Review decis
 | `POST` | `/api/reviews/:id/decision` | Approve, reject, or request changes | Reviewer |
 | `GET` | `/api/audit-logs` | List audit events | Admin |
 
+Phase 1 scaffold note: list and metrics routes currently return synthetic demo data without persistence while Supabase auth, database tables, and role checks are added in later foundation chunks.
+
 ## Error Codes
 
 Use a small predictable set of error codes:

@@ -1,7 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.routes.audit_logs import router as audit_logs_router
+from app.api.routes.dashboard import router as dashboard_router
+from app.api.routes.documents import router as documents_router
 from app.api.routes.health import router as health_router
+from app.api.routes.reviews import router as reviews_router
+from app.api.routes.runs import router as runs_router
 from app.core.config import get_settings
 
 settings = get_settings()
@@ -21,3 +26,8 @@ app.add_middleware(
 )
 
 app.include_router(health_router, prefix="/api")
+app.include_router(dashboard_router, prefix="/api")
+app.include_router(documents_router, prefix="/api")
+app.include_router(runs_router, prefix="/api")
+app.include_router(reviews_router, prefix="/api")
+app.include_router(audit_logs_router, prefix="/api")

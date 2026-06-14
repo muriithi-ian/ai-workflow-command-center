@@ -27,3 +27,19 @@ class RagQueryData(BaseModel):
     model: str
     created_at: datetime
     input_summary: str
+
+
+class AiRunSummary(BaseModel):
+    id: str
+    workflow: str
+    status: Literal["completed", "needs_review", "failed", "no_context"]
+    provider: Literal["mock"]
+    model: str
+    created_at: datetime
+    input_summary: str
+
+
+class AiRunDetail(AiRunSummary):
+    output: str
+    retrieved_context: list[RagSource]
+    errors: list[str]

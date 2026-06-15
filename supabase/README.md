@@ -11,6 +11,18 @@ supabase db reset
 
 The public demo can continue using mock/seed data until Supabase credentials are added to local `.env` files.
 
+## Local CLI Commands
+
+The repo installs Supabase CLI through npm. Start Docker Desktop first, then run from the repo root:
+
+```bash
+npm run supabase:start
+npm run supabase:status
+npm run supabase:reset
+```
+
+Use `npm run supabase -- <command>` for other CLI commands. The wrapper disables telemetry writes to the user home directory and redirects CLI runtime files into the ignored repo-local `.supabase/` folder.
+
 ## Schema Goals
 
 - Store documents, extracted chunks, embeddings, AI runs, review decisions, and audit logs.

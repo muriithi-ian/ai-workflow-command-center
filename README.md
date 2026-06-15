@@ -179,6 +179,18 @@ npm run dev:api
 
 Open `http://localhost:3000`, continue as Demo Admin, then use the dashboard navigation.
 
+## Local Supabase
+
+The Supabase CLI is installed as a project dev dependency. Start Docker Desktop first, then use:
+
+```bash
+npm run supabase:start
+npm run supabase:status
+npm run supabase:reset
+```
+
+The wrapper in `scripts/run-supabase.mjs` keeps Supabase CLI runtime files inside the repo-local ignored `.supabase/` folder so commands do not need to write telemetry files into your Windows home directory.
+
 ## Environment Variables
 
 The public local demo works with empty Supabase and provider keys. Keep `.env` private and commit only `.env.example`.

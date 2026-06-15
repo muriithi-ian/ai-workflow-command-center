@@ -20,13 +20,19 @@
     "lint": "npm run lint:web && npm run lint:api",
     "test": "npm run test:api",
     "format:check": "prettier . --check",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "supabase": "node scripts/run-supabase.mjs",
+    "supabase:start": "node scripts/run-supabase.mjs start",
+    "supabase:stop": "node scripts/run-supabase.mjs stop",
+    "supabase:status": "node scripts/run-supabase.mjs status",
+    "supabase:reset": "node scripts/run-supabase.mjs db reset"
   },
   "engines": {
     "node": ">=20",
     "python": ">=3.11"
   },
   "devDependencies": {
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "supabase": "^2.106.0"
   }
 }

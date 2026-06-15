@@ -10,6 +10,7 @@ def test_settings_report_supabase_when_required_public_values_exist() -> None:
     settings = Settings(
         next_public_supabase_url="https://demo.supabase.co",
         next_public_supabase_anon_key="anon-demo-key",
+        supabase_service_role_key="",
     )
 
     assert settings.supabase_configured is True
